@@ -62,7 +62,7 @@ export function generate (
   if (!rootProps) {
     return h(
       node.tag,
-      { key, attrs: { ...normalizeAttrs(node.attrs) }},
+      { key, ...normalizeAttrs(node.attrs) },
       (node.children || []).map((child, index) =>
         generate(h, child, `${key}-${node.tag}-${index}`)
       )
@@ -73,7 +73,7 @@ export function generate (
     {
       key,
       ...rootProps,
-      attrs: { ...normalizeAttrs(node.attrs), ...rootProps.attrs },
+      ...normalizeAttrs(node.attrs), ...rootProps.attrs,
     },
     (node.children || []).map((child, index) =>
       generate(h, child, `${key}-${node.tag}-${index}`)

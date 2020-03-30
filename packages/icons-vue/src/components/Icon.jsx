@@ -6,7 +6,7 @@ import {
   MiniMap,
   withSuffix,
 } from '../utils'
-
+import { h } from 'vue'
 const twoToneColorPalette = {
   primaryColor: '#333',
   secondaryColor: '#E6E6E6',
@@ -55,7 +55,7 @@ const Icon = {
       ...twoToneColorPalette,
     }
   },
-  render (h) {
+  render () {
     const {
       type,
       primaryColor,
@@ -90,21 +90,19 @@ const Icon = {
       }
     }
     return generate(h, target.icon, `svg-${target.name}`, {
-      attrs: {
-        'data-icon': target.name,
-        width: '1em',
-        height: '1em',
-        fill: 'currentColor',
-        'aria-hidden': 'true',
-      },
-      on: this.$listeners,
+      'data-icon': target.name,
+      width: '1em',
+      height: '1em',
+      fill: 'currentColor',
+      'aria-hidden': 'true',
+      ...this.$listeners,
     })
   },
 }
 
 /* istanbul ignore next */
-Icon.install = function (Vue) {
-  Vue.component(Icon.name, Icon)
+Icon.install = function (app) {
+  app.component(Icon.name, Icon)
 }
 
 export default Icon
